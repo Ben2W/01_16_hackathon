@@ -115,6 +115,7 @@ export const suggestion = pgTable(
 export const generatedReactApp = pgTable("GeneratedReactApp", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
+  description: text("description"),
   rawReactApp: text("rawReactApp").notNull(),
 });
 

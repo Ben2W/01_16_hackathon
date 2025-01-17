@@ -334,26 +334,40 @@ export async function saveGeneratedReactApp({
   id,
   rawReactApp,
   name,
+  description,
 }: {
   id: string;
   rawReactApp: string;
   name: string;
+  description: string;
 }) {
-  return await db.insert(generatedReactApp).values({ id, rawReactApp, name });
+  return await db.insert(generatedReactApp).values({
+    id,
+    rawReactApp,
+    name,
+    description,
+  });
 }
 
 export async function getGeneratedReactAppById({ id }: { id: string }) {
-  return await db
+  const [generatedApp] = await db
     .select({
       name: generatedReactApp.name,
+      description: generatedReactApp.description,
       rawReactApp: generatedReactApp.rawReactApp,
     })
     .from(generatedReactApp)
     .where(eq(generatedReactApp.id, id));
+
+  return generatedApp;
 }
 
 export async function getGeneratedReactApps() {
   return await db
-    .select({ id: generatedReactApp.id, name: generatedReactApp.name })
+    .select({
+      id: generatedReactApp.id,
+      name: generatedReactApp.name,
+      description: generatedReactApp.description,
+    })
     .from(generatedReactApp);
 }

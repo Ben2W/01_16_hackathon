@@ -1,0 +1,1 @@
+ALTER TABLE "GeneratedReactApp" ADD COLUMN "description" text;

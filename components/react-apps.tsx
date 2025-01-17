@@ -5,7 +5,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function ReactApps() {
-  const [apps, setApps] = useState<{ id: string; name: string }[]>([]);
+  const [apps, setApps] = useState<
+    {
+      id: string;
+      name: string;
+      description: string | null;
+    }[]
+  >([]);
 
   useEffect(() => {
     async function fetchApps() {
@@ -20,13 +26,13 @@ export function ReactApps() {
       {apps.map((app) => (
         <Link
           key={app.id}
-          href={`/react-apps/${app.id}`}
+          href={`/generated/${app.id}`}
           className="p-2 hover:bg-muted/50 transition-colors cursor-pointer rounded-md"
         >
           <div className="flex flex-col">
             <span className="font-medium">{app.name}</span>
             <span className="text-xs text-muted-foreground">
-              Interactive React App
+              {app.description ?? "No description available"}
             </span>
           </div>
         </Link>

@@ -13,7 +13,7 @@ export async function getReactApps() {
 }
 
 export async function getReactAppById(id: string) {
-  const [app] = await getGeneratedReactAppById({ id });
+  const app = await getGeneratedReactAppById({ id });
   return app;
 }
 
@@ -21,11 +21,13 @@ export async function createReactApp({
   id,
   name,
   rawReactApp,
+  description,
 }: {
   id: string;
   name: string;
   rawReactApp: string;
+  description: string;
 }) {
-  await saveGeneratedReactApp({ id, name, rawReactApp });
+  await saveGeneratedReactApp({ id, name, rawReactApp, description });
   revalidatePath("/react-apps");
 }

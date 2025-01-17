@@ -469,6 +469,8 @@ Here's the exact format to follow:
 
 const { createBrowserRouter, RouterProvider, Route, Link } = window.ReactRouterDOM;
 const { useRoutes, useNavigate } = window.ReactRouter;
+const { useEffect, useState } = window.React;
+
 
 function Header() {
   const navigate = useNavigate();
@@ -538,6 +540,7 @@ ReactDOM.render(<RouterProvider router={router} />, document.getElementById('roo
                   id,
                   rawReactApp,
                   name,
+                  description,
                 });
               }
 
@@ -575,6 +578,11 @@ ReactDOM.render(<RouterProvider router={router} />, document.getElementById('roo
                     };
                   }
                 ),
+              });
+
+              dataStream.writeData({
+                type: "redirect",
+                content: `/generated/${id}`,
               });
             } catch (error) {
               console.error("Failed to save chat");
