@@ -1,7 +1,7 @@
 export default async function GeneratedApp({
   params,
 }: {
-  params: { id?: string[] };
+  params: { id?: string[] | undefined };
 }) {
   const id = params.id;
   const catchAll = id?.join("/");
