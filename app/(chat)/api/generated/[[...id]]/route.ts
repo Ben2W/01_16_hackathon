@@ -1,6 +1,6 @@
 import { getGeneratedReactAppById } from "@/lib/db/queries";
 import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const html = ({ reactApp }: { reactApp: string }) => `<!DOCTYPE html>
 <html lang="en">
@@ -28,7 +28,8 @@ ${reactApp}
 </html>`;
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
+  response: NextResponse,
   { params }: { params: { id: string[] } }
 ) {
   const { id } = params;
