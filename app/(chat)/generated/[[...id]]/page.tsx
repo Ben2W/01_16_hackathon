@@ -1,5 +1,3 @@
-import { getGeneratedReactAppById } from "@/lib/db/queries";
-
 export default async function GeneratedApp({
   params,
 }: {

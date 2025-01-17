@@ -464,6 +464,7 @@ export async function POST(request: Request) {
 - Returns just the component code without any HTML or script tags
 - Uses modern React practices
 - IMPORTANT: All router paths must be prefixed with '/api/generated/${id}'
+- IMPORTANT: You do not have access to API keys, however you can access public apis.
 
 Here's the exact format to follow:
 
@@ -578,11 +579,6 @@ ReactDOM.render(<RouterProvider router={router} />, document.getElementById('roo
                     };
                   }
                 ),
-              });
-
-              dataStream.writeData({
-                type: "redirect",
-                content: `/generated/${id}`,
               });
             } catch (error) {
               console.error("Failed to save chat");

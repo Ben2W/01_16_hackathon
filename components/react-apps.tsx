@@ -19,6 +19,12 @@ export function ReactApps() {
       setApps(fetchedApps);
     }
     fetchApps();
+
+    // Set up interval to fetch every second
+    const interval = setInterval(fetchApps, 1000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
