@@ -26,16 +26,19 @@ ${reactApp}
 </body>
 
 </html>`;
-
 export async function GET(
   request: NextRequest,
-  response: NextResponse,
-  { params }: { params: { id: string[] } }
+  { params }: { params: { id?: string[] } }
 ) {
-  const { id } = params;
-  console.log(id);
+  if (!params.id?.[0]) {
+    return new NextResponse("Not Found", { status: 404 });
+  }
 
-  const reactApp = await getGeneratedReactAppById({ id: id?.[0] as string });
+  const reactApp = await getGeneratedReactAppById({ id: params.id[0] });
+
+  if (!reactApp) {
+    return new NextResponse("Not Found", { status: 404 });
+  }
 
   return new NextResponse(html({ reactApp: reactApp.rawReactApp }), {
     headers: {
