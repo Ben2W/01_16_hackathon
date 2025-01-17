@@ -29,12 +29,12 @@ ${reactApp}
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id?: string[] } }
 ) {
-  const { id } = await params;
+  const { id } = params;
   console.log(id);
 
-  const reactApp = await getGeneratedReactAppById({ id: id as string });
+  const reactApp = await getGeneratedReactAppById({ id: id?.[0] as string });
 
   return new NextResponse(html({ reactApp: reactApp.rawReactApp }), {
     headers: {
